@@ -9,25 +9,18 @@ export function Disclosure() {
   if (!visible) return null;
 
   return (
-    <div
-      className="w-full py-2 flex items-center bg-slate-50 border-b border-slate-200/50"
-      role="status"
-      aria-label="Advertising disclosure"
-    >
+    <div className="w-full bg-slate-50 border-b border-slate-100 py-2">
       <div className="container-wide flex items-center justify-between gap-4">
-        <p className="text-xs text-slate-400 truncate">
-          <span className="font-medium text-slate-500">
-            Advertising Disclosure:
-          </span>{" "}
-          This site may receive compensation through affiliate partnerships.
-          Rankings remain editorially independent.
+        <p className="text-xs text-slate-400">
+          <span className="font-medium text-slate-500">Advertising Disclosure:</span>{" "}
+          This site may receive compensation through affiliate partnerships. Rankings remain editorially independent.
         </p>
         <button
           onClick={() => setVisible(false)}
-          className="shrink-0 p-1 text-slate-400 hover:text-slate-600 transition-colors rounded-full hover:bg-slate-200/50"
-          aria-label="Dismiss disclosure"
+          className="shrink-0 p-1 text-slate-400 hover:text-slate-600 rounded"
+          aria-label="Dismiss"
         >
-          <X className="w-3.5 h-3.5" />
+          <X className="w-3 h-3" />
         </button>
       </div>
     </div>

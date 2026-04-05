@@ -16,20 +16,12 @@
     @apply bg-surface-primary text-slate-700 font-sans antialiased;
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
+  h1, h2, h3, h4 {
     @apply font-serif text-navy-900;
   }
 
   ::selection {
     @apply bg-navy-900/10;
-  }
-
-  /* Ensure framer-motion elements are visible even before JS hydrates */
-  [style*="opacity: 0"] {
-    opacity: 1 !important;
   }
 }
 
@@ -42,87 +34,45 @@
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
   }
 
-  .glass {
-    @apply bg-white/80 backdrop-blur-xl border border-white/20;
-  }
-
-  .glass-dark {
-    @apply bg-navy-900/80 backdrop-blur-xl border border-white/10;
-  }
-
-  .divider {
-    @apply h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent;
-  }
-
   .text-gradient-gold {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-trust-gold-dark via-trust-gold to-trust-gold-dark;
   }
 
-  .badge-verified {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full
-           bg-trust-gold/10 text-trust-gold-dark text-xs font-medium
-           border border-trust-gold/20;
-  }
-
-  .badge-rank {
-    @apply inline-flex items-center justify-center w-10 h-10
-           rounded-full bg-navy-900 text-white font-serif text-lg font-bold;
-  }
-
   .card-premium {
-    @apply relative bg-surface-card rounded-2xl border border-slate-100
-           shadow-card transition-all duration-300 overflow-hidden;
+    @apply relative bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden;
   }
 
   .card-premium:hover {
-    @apply shadow-card-hover border-slate-200;
+    @apply shadow-md border-slate-300;
   }
 
   .card-premium.editors-pick {
-    @apply border-trust-gold/30 shadow-glow-gold;
-  }
-
-  .card-premium.editors-pick:hover {
-    @apply border-trust-gold/50;
+    @apply border-trust-gold/40;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5
            bg-navy-900 text-white font-sans font-medium text-sm
-           rounded-xl transition-all duration-200
-           hover:bg-navy-800 hover:shadow-elevated
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-900/50 focus-visible:ring-offset-2;
-  }
-
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           bg-white text-navy-900 font-sans font-medium text-sm
-           rounded-xl border border-slate-200 transition-all duration-200
-           hover:bg-slate-50 hover:border-slate-300
+           rounded-lg transition-all duration-200
+           hover:bg-navy-800
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-900/50 focus-visible:ring-offset-2;
   }
 
   .btn-gold {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5
            bg-gradient-to-r from-trust-gold-dark via-trust-gold to-trust-gold-dark
            text-white font-sans font-semibold text-sm
-           rounded-xl transition-all duration-200
-           hover:shadow-glow-gold
+           rounded-lg transition-all duration-200
+           hover:opacity-90
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-trust-gold/50 focus-visible:ring-offset-2;
   }
 
-  .score-ring {
-    @apply relative;
-  }
-
-  .score-ring svg circle {
-    transform: rotate(-90deg);
-    transform-origin: center;
-  }
-
-  .score-ring circle {
-    fill: none;
-    stroke-linecap: round;
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5
+           bg-white text-navy-900 font-sans font-medium text-sm
+           rounded-lg border border-slate-200 transition-all duration-200
+           hover:bg-slate-50 hover:border-slate-300
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-900/50 focus-visible:ring-offset-2;
   }
 
   .section-label {

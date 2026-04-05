@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { USFlagIcon } from "@/components/ui/USFlagIcon";
 
@@ -23,100 +22,71 @@ export function Navbar() {
 
   return (
     <nav
-      role="navigation"
-      aria-label="Primary navigation"
-      className={`sticky top-0 z-50 w-full h-[72px] flex items-center transition-all duration-300 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-card"
+          ? "bg-white/95 backdrop-blur-md shadow-sm"
           : "bg-white border-b border-slate-100"
       }`}
     >
-      <div className="container-wide flex items-center justify-between w-full">
-        {/* LEFT: Logo */}
-        <a
-          href="/"
-          className="flex items-center gap-2.5 shrink-0 group"
-          aria-label="US Immigration Authority — Home"
-        >
-          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-navy-900 group-hover:bg-navy-800 transition-colors overflow-hidden p-1.5">
-            <USFlagIcon size={22} />
+      <div className="container-wide flex items-center justify-between h-16">
+        {/* Logo */}
+        <a href="/" className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-navy-900 flex items-center justify-center p-1">
+            <USFlagIcon size={20} />
           </div>
-          <span className="font-serif text-base md:text-lg font-bold text-navy-900 leading-tight">
+          <span className="font-serif text-sm md:text-base font-bold text-navy-900">
             US Immigration Authority
           </span>
         </a>
 
-        {/* CENTER: Nav Links (desktop) */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-slate-500 hover:text-navy-900 transition-colors"
+              className="text-sm text-slate-500 hover:text-navy-900 transition-colors"
             >
               {link.label}
             </a>
           ))}
+          <a href="#rankings" className="btn-primary !px-4 !py-2 !text-xs">
+            View Rankings
+          </a>
         </div>
 
-        {/* RIGHT: CTA + Mobile toggle */}
-        <div className="flex items-center gap-3">
+        {/* Mobile toggle */}
+        <button
+          className="md:hidden p-2 text-slate-500"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+        >
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="block text-sm text-slate-600 py-2 px-3 rounded-lg hover:bg-slate-50"
+              onClick={() => setMobileOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
           <a
             href="#rankings"
-            className="hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-semibold text-navy-900 border border-navy-900/15 hover:bg-navy-900 hover:text-white transition-all duration-200"
+            className="block text-center text-sm font-semibold py-2 px-3 rounded-lg bg-navy-900 text-white mt-2"
+            onClick={() => setMobileOpen(false)}
           >
             View Rankings
           </a>
-
-          <button
-            className="md:hidden p-2 -mr-1 text-slate-500 hover:text-navy-900 transition-colors"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
-          </button>
         </div>
-      </div>
-
-      {/* Mobile Dropdown */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.15 }}
-            className="absolute top-[72px] left-0 right-0 bg-white/98 backdrop-blur-md border-b border-slate-100 shadow-card md:hidden"
-          >
-            <div className="container-wide py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-slate-600 hover:text-navy-900 py-3 px-4 rounded-xl hover:bg-slate-50 transition-colors font-medium"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <div className="pt-2 mt-2 border-t border-slate-100">
-                <a
-                  href="#rankings"
-                  className="block text-center text-sm font-semibold py-3 px-4 rounded-xl bg-navy-900 text-white hover:bg-navy-800 transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  View Rankings
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      )}
     </nav>
   );
 }

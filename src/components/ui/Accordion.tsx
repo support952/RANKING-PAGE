@@ -26,17 +26,17 @@ export function Accordion({ items, className }: AccordionProps) {
         <AccordionPrimitive.Item
           key={item.value}
           value={item.value}
-          className="group bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-card transition-all data-[state=open]:shadow-card-hover data-[state=open]:border-slate-200"
+          className="group bg-white border border-slate-200 rounded-xl overflow-hidden"
         >
-          <AccordionPrimitive.Trigger className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left font-serif text-lg font-semibold text-navy-900 hover:bg-slate-50/50 transition-colors">
+          <AccordionPrimitive.Trigger className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-serif text-base font-semibold text-navy-900 hover:bg-slate-50 transition-colors">
             <span>{item.trigger}</span>
             <ChevronDown
-              className="w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
+              className="w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
               aria-hidden="true"
             />
           </AccordionPrimitive.Trigger>
           <AccordionPrimitive.Content className="overflow-hidden data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
-            <div className="px-6 pb-6 text-base text-slate-600 leading-relaxed">
+            <div className="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
               {item.content}
             </div>
           </AccordionPrimitive.Content>
