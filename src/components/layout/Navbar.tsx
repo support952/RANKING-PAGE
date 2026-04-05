@@ -41,18 +41,18 @@ export function Navbar() {
           <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-navy-900 group-hover:bg-navy-800 transition-colors overflow-hidden p-1.5">
             <USFlagIcon size={22} />
           </div>
-          <span className="font-serif text-[1rem] md:text-[1.1rem] font-bold text-navy-900 leading-tight">
+          <span className="font-serif text-base md:text-lg font-bold text-navy-900 leading-tight">
             US Immigration Authority
           </span>
         </a>
 
         {/* CENTER: Nav Links (desktop) */}
-        <div className="hidden md:flex items-center gap-7">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-[0.8125rem] font-medium text-slate-500 hover:text-navy-900 transition-colors"
+              className="text-sm font-medium text-slate-500 hover:text-navy-900 transition-colors"
             >
               {link.label}
             </a>
@@ -63,7 +63,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <a
             href="#rankings"
-            className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[0.75rem] font-semibold text-navy-900 border border-navy-900/15 hover:bg-navy-900 hover:text-white transition-all duration-200"
+            className="hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-semibold text-navy-900 border border-navy-900/15 hover:bg-navy-900 hover:text-white transition-all duration-200"
           >
             View Rankings
           </a>
@@ -93,21 +93,21 @@ export function Navbar() {
             transition={{ duration: 0.15 }}
             className="absolute top-[72px] left-0 right-0 bg-white/98 backdrop-blur-md border-b border-slate-100 shadow-card md:hidden"
           >
-            <div className="container-wide py-3 flex flex-col gap-0.5">
+            <div className="container-wide py-4 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-slate-600 hover:text-navy-900 py-2.5 px-3 rounded-lg hover:bg-slate-50 transition-colors font-medium"
+                  className="text-sm text-slate-600 hover:text-navy-900 py-3 px-4 rounded-xl hover:bg-slate-50 transition-colors font-medium"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="pt-2 mt-1 border-t border-slate-100">
+              <div className="pt-2 mt-2 border-t border-slate-100">
                 <a
                   href="#rankings"
-                  className="block text-center text-sm font-semibold py-2.5 px-3 rounded-lg bg-navy-900 text-white hover:bg-navy-800 transition-colors"
+                  className="block text-center text-sm font-semibold py-3 px-4 rounded-xl bg-navy-900 text-white hover:bg-navy-800 transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
                   View Rankings

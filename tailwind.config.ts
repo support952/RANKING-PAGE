@@ -91,6 +91,8 @@ const config: Config = {
         "fade-in": "fadeIn 0.6s ease-out forwards",
         "slide-up": "slideUp 0.6s ease-out forwards",
         "glow-pulse": "glowPulse 3s ease-in-out infinite",
+        slideDown: "slideDown 0.2s ease-out",
+        slideUp: "slideUpAccordion 0.2s ease-out",
       },
       keyframes: {
         fadeIn: {
@@ -108,6 +110,14 @@ const config: Config = {
           "50%": {
             boxShadow: "0 0 30px rgba(201, 168, 76, 0.25)",
           },
+        },
+        slideDown: {
+          "0%": { height: "0", opacity: "0" },
+          "100%": { height: "var(--radix-accordion-content-height)", opacity: "1" },
+        },
+        slideUpAccordion: {
+          "0%": { height: "var(--radix-accordion-content-height)", opacity: "1" },
+          "100%": { height: "0", opacity: "0" },
         },
       },
     },

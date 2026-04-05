@@ -34,7 +34,7 @@ export function Methodology() {
   return (
     <section
       id="methodology"
-      className="py-16 md:py-24 bg-navy-900 relative overflow-hidden"
+      className="py-20 md:py-28 bg-navy-900 relative overflow-hidden"
       aria-labelledby="methodology-heading"
     >
       {/* Grid overlay */}
@@ -49,15 +49,15 @@ export function Methodology() {
       />
 
       <div className="container-narrow relative z-10">
-        <div className="text-center mb-14">
-          <p className="section-label mb-3">Our Process</p>
+        <div className="text-center mb-16">
+          <p className="section-label mb-4 text-sm">Our Process</p>
           <h2
             id="methodology-heading"
-            className="font-serif text-display-sm md:text-display font-bold text-white text-balance mb-4"
+            className="font-serif text-3xl md:text-4xl font-bold text-white text-balance mb-5"
           >
             Rigorous, Independent Methodology
           </h2>
-          <p className="text-body-lg text-slate-400 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
             Every ranking is the result of a structured, transparent evaluation
             process reviewed by legal professionals.
           </p>
@@ -73,23 +73,23 @@ export function Methodology() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm"
+                className="bg-white/5 border border-white/10 rounded-2xl p-7 backdrop-blur-sm hover:bg-white/[0.07] transition-colors"
               >
-                <div className="flex items-center gap-4 mb-3">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-trust-gold/10 border border-trust-gold/20">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-trust-gold/10 border border-trust-gold/20">
                     <Icon
                       className="w-5 h-5 text-trust-gold"
                       aria-hidden="true"
                     />
                   </div>
-                  <span className="font-serif text-caption text-trust-gold-light font-bold">
+                  <span className="font-serif text-xs text-trust-gold-light font-bold uppercase tracking-wider">
                     Step {i + 1}
                   </span>
                 </div>
-                <h3 className="font-serif text-heading font-bold text-white mb-2">
+                <h3 className="font-serif text-xl font-bold text-white mb-3">
                   {step.title}
                 </h3>
-                <p className="text-body-sm text-slate-400 leading-relaxed">
+                <p className="text-sm text-slate-400 leading-relaxed">
                   {step.description}
                 </p>
               </motion.div>

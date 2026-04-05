@@ -8,19 +8,19 @@ export function AuditTrail() {
   return (
     <section
       id="audit"
-      className="py-16 md:py-24 bg-surface-secondary"
+      className="py-20 md:py-28 bg-surface-secondary"
       aria-labelledby="audit-heading"
     >
       <div className="container-narrow">
-        <div className="text-center mb-12">
-          <p className="section-label mb-3">Transparency</p>
+        <div className="text-center mb-14">
+          <p className="section-label mb-4">Transparency</p>
           <h2
             id="audit-heading"
-            className="font-serif text-display-sm font-bold text-navy-900 text-balance mb-4"
+            className="font-serif text-3xl md:text-4xl font-bold text-navy-900 text-balance mb-5"
           >
             Editorial Audit Trail
           </h2>
-          <p className="text-body text-slate-500 max-w-xl mx-auto">
+          <p className="text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
             Every ranking decision is documented. Full transparency in our
             editorial process.
           </p>
@@ -34,25 +34,25 @@ export function AuditTrail() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="flex items-start gap-4 bg-white rounded-xl border border-slate-100 p-5 shadow-card"
+              className="flex items-start gap-5 bg-white rounded-2xl border border-slate-100 p-6 shadow-card hover:shadow-card-hover transition-shadow"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-navy-900/5 shrink-0">
+              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-navy-900/5 shrink-0">
                 <FileCheck
                   className="w-5 h-5 text-navy-900"
                   aria-hidden="true"
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-body font-medium text-navy-900">
+                <p className="text-base font-semibold text-navy-900 mb-2">
                   {entry.action}
                 </p>
-                <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1.5">
-                  <span className="inline-flex items-center gap-1.5 text-caption text-slate-400">
-                    <Calendar className="w-3 h-3" aria-hidden="true" />
+                <div className="flex flex-wrap gap-x-5 gap-y-1">
+                  <span className="inline-flex items-center gap-2 text-sm text-slate-400">
+                    <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
                     {entry.date}
                   </span>
-                  <span className="inline-flex items-center gap-1.5 text-caption text-slate-400">
-                    <User className="w-3 h-3" aria-hidden="true" />
+                  <span className="inline-flex items-center gap-2 text-sm text-slate-400">
+                    <User className="w-3.5 h-3.5" aria-hidden="true" />
                     {entry.reviewer}
                   </span>
                 </div>

@@ -8,14 +8,12 @@ interface ScoreGaugeProps {
   score: number;
   size?: number;
   strokeWidth?: number;
-  showLabel?: boolean;
 }
 
 export function ScoreGauge({
   score,
-  size = 72,
-  strokeWidth = 4,
-  showLabel,
+  size = 48,
+  strokeWidth = 3,
 }: ScoreGaugeProps) {
   const ref = useRef<SVGSVGElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
@@ -25,12 +23,11 @@ export function ScoreGauge({
   const progress = score / 10;
   const dashOffset = circumference * (1 - progress);
 
-  const autoShowLabel = showLabel ?? size >= 64;
-  const fontSize = size <= 48 ? "text-xs" : "text-lg";
+  const fontSize = size <= 40 ? "text-[0.65rem]" : size <= 48 ? "text-xs" : "text-sm";
 
   return (
     <div
-      className="score-ring flex flex-col items-center gap-0.5"
+      className="score-ring inline-flex shrink-0"
       aria-label={`Score: ${score} out of 10 — ${getScoreLabel(score)}`}
     >
       <svg
@@ -72,11 +69,6 @@ export function ScoreGauge({
           {score}
         </text>
       </svg>
-      {autoShowLabel && (
-        <span className="text-[0.6rem] text-slate-400 font-medium leading-none">
-          {getScoreLabel(score)}
-        </span>
-      )}
     </div>
   );
 }

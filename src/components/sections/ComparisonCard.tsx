@@ -36,9 +36,9 @@ function getMedalLabel(rank: number) {
 }
 
 const topThreeBg: Record<number, string> = {
-  1: "bg-amber-50/50",
-  2: "bg-slate-50/70",
-  3: "bg-orange-50/40",
+  1: "bg-amber-50/60",
+  2: "bg-slate-50/80",
+  3: "bg-orange-50/50",
 };
 
 // Simulated review counts per rank for social proof
@@ -66,44 +66,44 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
         transition={{ duration: 0.4, delay: index * 0.05 }}
         className={cn(
           "card-premium",
-          isTopThree && "editors-pick animate-glow-pulse"
+          isTopThree && "editors-pick"
         )}
         aria-label={`Rank ${provider.rank}: ${provider.name}`}
       >
         {/* Gold ribbon for top 3 */}
         {isTopThree && (
-          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-trust-gold to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-trust-gold to-transparent" />
         )}
 
         {/* ── MAIN ROW ── */}
         <div
           className={cn(
-            "px-5 py-4 md:px-6 md:py-4",
+            "px-5 py-5 md:px-7 md:py-5",
             isTopThree && topThreeBg[provider.rank]
           )}
         >
           {/* Desktop: horizontal layout */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             {/* LEFT: Rank + Brand */}
-            <div className="flex items-center gap-3 min-w-0 flex-1">
+            <div className="flex items-center gap-4 min-w-0 flex-1">
               <Badge
                 variant="rank"
                 className={cn(
-                  "shrink-0 w-9 h-9 text-base",
-                  isTopThree && "w-10 h-10"
+                  "shrink-0",
+                  isTopThree ? "w-12 h-12 text-xl" : "w-10 h-10 text-base"
                 )}
               >
                 {provider.rank}
               </Badge>
 
               <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex items-center gap-2.5 flex-wrap">
                   <h3
                     className={cn(
                       "font-serif font-bold text-navy-900",
                       isTopThree
-                        ? "text-base md:text-lg"
-                        : "text-sm md:text-base"
+                        ? "text-lg md:text-xl"
+                        : "text-base md:text-lg"
                     )}
                   >
                     {provider.name}
@@ -113,42 +113,36 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
                     <Badge variant="verified">Verified Provider</Badge>
                   ) : null}
                 </div>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-sm text-slate-400 mt-1">
                   {provider.tagline}
                 </p>
               </div>
             </div>
 
             {/* MIDDLE: 4-column Specs (desktop) */}
-            <div className="hidden lg:flex items-center gap-4 shrink-0">
+            <div className="hidden lg:flex items-center gap-3 shrink-0">
               {provider.specs.map((spec) => (
                 <div
                   key={spec.label}
-                  className="flex flex-col items-center px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-100 min-w-[90px]"
+                  className="flex flex-col items-center px-4 py-2 rounded-xl bg-slate-50 border border-slate-100 min-w-[100px]"
                 >
-                  <span className="text-[0.6rem] text-slate-400 uppercase tracking-wider font-medium">
+                  <span className="text-[0.65rem] text-slate-400 uppercase tracking-wider font-medium">
                     {spec.label}
                   </span>
-                  <span className="text-xs font-bold text-navy-900 mt-0.5">
+                  <span className="text-sm font-bold text-navy-900 mt-0.5">
                     {spec.value}
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* RIGHT: Score + Review count + CTA + Toggle */}
-            <div className="flex items-center gap-3 shrink-0">
-              <div className="flex flex-col items-center">
-                <ScoreGauge
-                  score={provider.score}
-                  size={48}
-                  strokeWidth={3}
-                />
-                <span className="text-[0.55rem] text-slate-400 mt-0.5 whitespace-nowrap">
-                  ({(provider.trustpilotScore || provider.score / 2).toFixed(1)}/5
-                  &middot; {reviews.toLocaleString()}+ reviews)
-                </span>
-              </div>
+            {/* RIGHT: Score + CTA + Toggle */}
+            <div className="flex items-center gap-4 shrink-0">
+              <ScoreGauge
+                score={provider.score}
+                size={isTopThree ? 46 : 40}
+                strokeWidth={3}
+              />
 
               <Button
                 variant={isTopThree ? "gold" : "primary"}
@@ -156,21 +150,21 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 aria-label={`${provider.ctaLabel} — ${provider.name}`}
-                className="hidden sm:inline-flex !px-4 !py-2 !text-xs"
+                className="hidden sm:inline-flex !px-5 !py-2.5 !text-sm"
               >
                 {provider.ctaLabel}
-                <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
               </Button>
 
               <button
                 onClick={() => setExpanded(!expanded)}
-                className="shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+                className="shrink-0 p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
                 aria-expanded={expanded}
                 aria-label={expanded ? "Show less" : "Show more details"}
               >
                 <ChevronDown
                   className={cn(
-                    "w-4 h-4 transition-transform duration-200",
+                    "w-5 h-5 transition-transform duration-200",
                     expanded && "rotate-180"
                   )}
                 />
@@ -179,16 +173,16 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
           </div>
 
           {/* Mobile: Specs 2x2 grid */}
-          <div className="lg:hidden grid grid-cols-2 gap-2 mt-3 ml-12">
+          <div className="lg:hidden grid grid-cols-2 gap-2.5 mt-4 ml-14">
             {provider.specs.map((spec) => (
               <div
                 key={spec.label}
-                className="flex items-baseline gap-1.5 px-2 py-1 rounded bg-slate-50 border border-slate-100"
+                className="flex items-baseline gap-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-100"
               >
-                <span className="text-[0.6rem] text-slate-400 uppercase tracking-wide">
+                <span className="text-[0.65rem] text-slate-400 uppercase tracking-wide">
                   {spec.label}:
                 </span>
-                <span className="text-[0.7rem] font-bold text-navy-900">
+                <span className="text-xs font-bold text-navy-900">
                   {spec.value}
                 </span>
               </div>
@@ -196,28 +190,28 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
           </div>
 
           {/* Mobile CTA */}
-          <div className="sm:hidden mt-3 ml-12">
+          <div className="sm:hidden mt-4 ml-14">
             <Button
               variant={isTopThree ? "gold" : "primary"}
               href={provider.ctaUrl}
               target="_blank"
               rel="noopener noreferrer nofollow"
               aria-label={`${provider.ctaLabel} — ${provider.name}`}
-              className="!px-3 !py-1.5 !text-xs w-full justify-center"
+              className="!px-4 !py-2 !text-sm w-full justify-center"
             >
               {provider.ctaLabel}
-              <ExternalLink className="w-3 h-3" aria-hidden="true" />
+              <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
             </Button>
           </div>
 
           {/* Always-visible Rate link */}
           {!expanded && (
-            <div className="flex justify-end mt-2">
+            <div className="flex justify-end mt-3">
               <button
                 onClick={() => setRatingOpen(true)}
-                className="inline-flex items-center gap-1 text-[0.65rem] font-medium text-slate-300 hover:text-amber-500 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-amber-500 transition-colors"
               >
-                <Star className="w-2.5 h-2.5" aria-hidden="true" />
+                <Star className="w-3 h-3" aria-hidden="true" />
                 Rate this provider
               </button>
             </div>
@@ -234,18 +228,18 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
               transition={{ duration: 0.25, ease: "easeInOut" }}
               className="overflow-hidden"
             >
-              <div className="px-5 md:px-6 py-4 border-t border-slate-100 space-y-3">
+              <div className="px-5 md:px-7 py-5 border-t border-slate-100 space-y-4">
                 {/* Expert Verdict */}
                 <div
                   className={cn(
-                    "rounded-lg px-4 py-3",
+                    "rounded-xl px-5 py-4",
                     isTopThree
-                      ? "bg-white/70 border border-slate-100/80"
-                      : "bg-surface-secondary"
+                      ? "bg-amber-50/50 border border-amber-100/50"
+                      : "bg-surface-secondary border border-slate-100"
                   )}
                 >
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    <span className="font-semibold text-slate-500">
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    <span className="font-semibold text-navy-900">
                       Expert Verdict:
                     </span>{" "}
                     {provider.expertVerdict}
@@ -253,19 +247,19 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
                 </div>
 
                 {/* Pros & Cons */}
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-5">
                   <div className="flex-1">
-                    <p className="text-[0.65rem] text-slate-400 font-semibold uppercase tracking-wider mb-1.5">
+                    <p className="text-xs text-emerald-600 font-semibold uppercase tracking-wider mb-2">
                       Strengths
                     </p>
-                    <ul className="space-y-1">
+                    <ul className="space-y-2">
                       {provider.pros.map((pro) => (
                         <li
                           key={pro}
-                          className="flex items-start gap-1.5 text-xs text-slate-600"
+                          className="flex items-start gap-2 text-sm text-slate-600"
                         >
                           <CheckCircle
-                            className="w-3 h-3 text-trust-green mt-0.5 shrink-0"
+                            className="w-4 h-4 text-trust-green mt-0.5 shrink-0"
                             aria-hidden="true"
                           />
                           {pro}
@@ -274,17 +268,17 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
                     </ul>
                   </div>
                   <div className="flex-1">
-                    <p className="text-[0.65rem] text-slate-400 font-semibold uppercase tracking-wider mb-1.5">
+                    <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-2">
                       Considerations
                     </p>
-                    <ul className="space-y-1">
+                    <ul className="space-y-2">
                       {provider.cons.map((con) => (
                         <li
                           key={con}
-                          className="flex items-start gap-1.5 text-xs text-slate-500"
+                          className="flex items-start gap-2 text-sm text-slate-500"
                         >
                           <AlertCircle
-                            className="w-3 h-3 text-slate-400 mt-0.5 shrink-0"
+                            className="w-4 h-4 text-slate-400 mt-0.5 shrink-0"
                             aria-hidden="true"
                           />
                           {con}
@@ -295,34 +289,34 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
                 </div>
 
                 {/* Meta + Rate button */}
-                <div className="flex items-center justify-between pt-2 border-t border-slate-100">
-                  <div className="flex flex-wrap gap-x-4 gap-y-0.5">
+                <div className="flex items-center justify-between pt-3 border-t border-slate-100">
+                  <div className="flex flex-wrap gap-x-5 gap-y-1">
                     {provider.yearFounded && (
-                      <span className="text-[0.65rem] text-slate-400">
+                      <span className="text-xs text-slate-400">
                         Est. {provider.yearFounded}
                       </span>
                     )}
                     {provider.headquartersCity && (
-                      <span className="text-[0.65rem] text-slate-400">
+                      <span className="text-xs text-slate-400">
                         HQ: {provider.headquartersCity}
                       </span>
                     )}
                     {provider.bbRating && (
-                      <span className="text-[0.65rem] text-slate-400">
+                      <span className="text-xs text-slate-400">
                         BBB: {provider.bbRating}
                       </span>
                     )}
                     {provider.trustpilotScore && (
-                      <span className="text-[0.65rem] text-slate-400">
+                      <span className="text-xs text-slate-400">
                         Trustpilot: {provider.trustpilotScore}/5.0
                       </span>
                     )}
                   </div>
                   <button
                     onClick={() => setRatingOpen(true)}
-                    className="inline-flex items-center gap-1 text-[0.7rem] font-medium text-slate-400 hover:text-amber-500 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-amber-500 transition-colors"
                   >
-                    <Star className="w-3 h-3" aria-hidden="true" />
+                    <Star className="w-3.5 h-3.5" aria-hidden="true" />
                     Rate this provider
                   </button>
                 </div>

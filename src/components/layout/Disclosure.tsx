@@ -10,12 +10,12 @@ export function Disclosure() {
 
   return (
     <div
-      className="w-full h-8 flex items-center bg-slate-50 border-b border-slate-200/50"
+      className="w-full py-2 flex items-center bg-slate-50 border-b border-slate-200/50"
       role="status"
       aria-label="Advertising disclosure"
     >
       <div className="container-wide flex items-center justify-between gap-4">
-        <p className="text-[0.65rem] text-slate-400 truncate">
+        <p className="text-xs text-slate-400 truncate">
           <span className="font-medium text-slate-500">
             Advertising Disclosure:
           </span>{" "}
@@ -24,10 +24,10 @@ export function Disclosure() {
         </p>
         <button
           onClick={() => setVisible(false)}
-          className="shrink-0 p-0.5 text-slate-400 hover:text-slate-600 transition-colors"
+          className="shrink-0 p-1 text-slate-400 hover:text-slate-600 transition-colors rounded-full hover:bg-slate-200/50"
           aria-label="Dismiss disclosure"
         >
-          <X className="w-3 h-3" />
+          <X className="w-3.5 h-3.5" />
         </button>
       </div>
     </div>

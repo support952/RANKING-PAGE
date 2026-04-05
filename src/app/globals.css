@@ -26,6 +26,11 @@
   ::selection {
     @apply bg-navy-900/10;
   }
+
+  /* Ensure framer-motion elements are visible even before JS hydrates */
+  [style*="opacity: 0"] {
+    opacity: 1 !important;
+  }
 }
 
 @layer components {
@@ -55,7 +60,7 @@
 
   .badge-verified {
     @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full
-           bg-trust-gold/10 text-trust-gold-dark text-caption font-medium
+           bg-trust-gold/10 text-trust-gold-dark text-xs font-medium
            border border-trust-gold/20;
   }
 
@@ -83,7 +88,7 @@
 
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           bg-navy-900 text-white font-sans font-medium text-body-sm
+           bg-navy-900 text-white font-sans font-medium text-sm
            rounded-xl transition-all duration-200
            hover:bg-navy-800 hover:shadow-elevated
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-900/50 focus-visible:ring-offset-2;
@@ -91,7 +96,7 @@
 
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           bg-white text-navy-900 font-sans font-medium text-body-sm
+           bg-white text-navy-900 font-sans font-medium text-sm
            rounded-xl border border-slate-200 transition-all duration-200
            hover:bg-slate-50 hover:border-slate-300
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-900/50 focus-visible:ring-offset-2;
@@ -100,18 +105,19 @@
   .btn-gold {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
            bg-gradient-to-r from-trust-gold-dark via-trust-gold to-trust-gold-dark
-           text-white font-sans font-semibold text-body-sm
+           text-white font-sans font-semibold text-sm
            rounded-xl transition-all duration-200
            hover:shadow-glow-gold
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-trust-gold/50 focus-visible:ring-offset-2;
   }
 
   .score-ring {
-    @apply relative inline-flex items-center justify-center;
+    @apply relative;
   }
 
-  .score-ring svg {
-    @apply -rotate-90;
+  .score-ring svg circle {
+    transform: rotate(-90deg);
+    transform-origin: center;
   }
 
   .score-ring circle {
@@ -120,7 +126,7 @@
   }
 
   .section-label {
-    @apply text-caption font-semibold uppercase tracking-widest text-trust-gold-dark;
+    @apply text-xs font-semibold uppercase tracking-widest text-trust-gold-dark;
   }
 }
 

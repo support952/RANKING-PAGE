@@ -10,12 +10,12 @@ export const providers: Provider[] = [
     tagline: "Legal Excellence & Personal Guidance",
     expertVerdict:
       "The gold standard in U.S. immigration services. Combines licensed legal counsel with a white-glove client experience, delivering the highest success rate we have documented across all evaluated providers.",
-    score: 9.9,
+    score: 9.3,
     editorsChoice: true,
     premium: true,
     specs: [
-      { label: "Processing Time", value: "2-4 weeks" },
-      { label: "Success Rate", value: "99.1%" },
+      { label: "Processing Time", value: "4-8 weeks" },
+      { label: "Success Rate", value: "93.1%" },
       { label: "Support", value: "24/7 Legal Team" },
       { label: "Languages", value: "14+" },
     ],
@@ -30,7 +30,7 @@ export const providers: Provider[] = [
     yearFounded: 2008,
     headquartersCity: "New York",
     bbRating: "A+",
-    trustpilotScore: 4.9,
+    trustpilotScore: 4.8,
   },
   {
     id: "usa-green-card",
@@ -40,12 +40,12 @@ export const providers: Provider[] = [
     tagline: "Visa & Diversity Program Specialists",
     expertVerdict:
       "The leading specialist for DV Lottery and green card applications. Their focused expertise in diversity visa programs and streamlined digital workflow make them the top choice for green card seekers.",
-    score: 9.7,
+    score: 8.9,
     editorsChoice: true,
     premium: true,
     specs: [
-      { label: "Processing Time", value: "2-5 weeks" },
-      { label: "Success Rate", value: "98.4%" },
+      { label: "Processing Time", value: "5-10 weeks" },
+      { label: "Success Rate", value: "89.7%" },
       { label: "Support", value: "24/7 Live" },
       { label: "Languages", value: "12+" },
     ],
@@ -60,7 +60,7 @@ export const providers: Provider[] = [
     yearFounded: 2010,
     headquartersCity: "Miami",
     bbRating: "A+",
-    trustpilotScore: 4.8,
+    trustpilotScore: 4.6,
   },
   {
     id: "immi-net",
@@ -70,12 +70,12 @@ export const providers: Provider[] = [
     tagline: "Seamless Digital Relocation Solutions",
     expertVerdict:
       "A technology-forward platform that excels at simplifying the immigration journey. Their AI-assisted document preparation and real-time tracking dashboard set a new industry benchmark for digital-first applicants.",
-    score: 9.5,
+    score: 8.6,
     editorsChoice: true,
     premium: true,
     specs: [
-      { label: "Processing Time", value: "3-5 weeks" },
-      { label: "Success Rate", value: "97.6%" },
+      { label: "Processing Time", value: "6-12 weeks" },
+      { label: "Success Rate", value: "87.2%" },
       { label: "Support", value: "24/7 Chat + Phone" },
       { label: "Languages", value: "10+" },
     ],
@@ -89,8 +89,8 @@ export const providers: Provider[] = [
     ctaUrl: "https://immi-net.com/",
     yearFounded: 2014,
     headquartersCity: "San Francisco",
-    bbRating: "A+",
-    trustpilotScore: 4.8,
+    bbRating: "A",
+    trustpilotScore: 4.5,
   },
   {
     id: "good-advise",
@@ -100,12 +100,12 @@ export const providers: Provider[] = [
     tagline: "Trusted Consulting for Modern Immigration",
     expertVerdict:
       "Bridges the gap between affordable self-filing and full legal representation. Their dedicated consultant model provides personalized guidance at a competitive price point, earning strong client loyalty scores.",
-    score: 9.3,
+    score: 8.2,
     editorsChoice: true,
     premium: true,
     specs: [
-      { label: "Processing Time", value: "3-6 weeks" },
-      { label: "Success Rate", value: "96.9%" },
+      { label: "Processing Time", value: "6-14 weeks" },
+      { label: "Success Rate", value: "84.5%" },
       { label: "Support", value: "Dedicated Consultant" },
       { label: "Languages", value: "8+" },
     ],
@@ -120,7 +120,7 @@ export const providers: Provider[] = [
     yearFounded: 2012,
     headquartersCity: "Chicago",
     bbRating: "A",
-    trustpilotScore: 4.7,
+    trustpilotScore: 4.3,
   },
   {
     id: "immigration-services-group",
@@ -130,12 +130,12 @@ export const providers: Provider[] = [
     tagline: "Strategic Global Mobility Partners",
     expertVerdict:
       "The premier choice for corporate and employer-sponsored immigration. Their global mobility team handles complex multi-jurisdictional cases with a level of strategic depth unmatched by generalist providers.",
-    score: 9.1,
+    score: 7.8,
     editorsChoice: true,
     premium: true,
     specs: [
-      { label: "Processing Time", value: "3-6 weeks" },
-      { label: "Success Rate", value: "96.2%" },
+      { label: "Processing Time", value: "8-16 weeks" },
+      { label: "Success Rate", value: "81.8%" },
       { label: "Support", value: "Account Manager" },
       { label: "Languages", value: "9+" },
     ],
@@ -149,8 +149,8 @@ export const providers: Provider[] = [
     ctaUrl: "https://immigrationservicesgroup.com/",
     yearFounded: 2009,
     headquartersCity: "Washington, D.C.",
-    bbRating: "A",
-    trustpilotScore: 4.6,
+    bbRating: "A-",
+    trustpilotScore: 4.1,
   },
 
   // ─── STANDARD TIER ─────────────────────────────────────────────────
@@ -162,12 +162,12 @@ export const providers: Provider[] = [
     tagline: "General Immigration Resources",
     expertVerdict:
       "A well-established resource hub offering broad guidance across multiple visa categories. Solid for applicants who want general orientation before committing to a full-service provider.",
-    score: 8.5,
+    score: 7.9,
     editorsChoice: false,
     premium: false,
     specs: [
-      { label: "Processing Time", value: "4-7 weeks" },
-      { label: "Success Rate", value: "94.1%" },
+      { label: "Processing Time", value: "10-18 weeks" },
+      { label: "Success Rate", value: "78.4%" },
       { label: "Support", value: "Business Hours" },
       { label: "Languages", value: "6+" },
     ],
@@ -182,7 +182,7 @@ export const providers: Provider[] = [
     yearFounded: 2011,
     headquartersCity: "Houston",
     bbRating: "B+",
-    trustpilotScore: 4.3,
+    trustpilotScore: 3.8,
   },
   {
     id: "us-immigration-support-org",
@@ -192,12 +192,12 @@ export const providers: Provider[] = [
     tagline: "Document Preparation Services",
     expertVerdict:
       "Focused on document preparation and form accuracy. A practical choice for applicants who understand their visa category and need reliable help ensuring paperwork is filed correctly.",
-    score: 8.2,
+    score: 7.4,
     editorsChoice: false,
     premium: false,
     specs: [
-      { label: "Processing Time", value: "4-8 weeks" },
-      { label: "Success Rate", value: "93.5%" },
+      { label: "Processing Time", value: "10-20 weeks" },
+      { label: "Success Rate", value: "74.1%" },
       { label: "Support", value: "Email + Phone" },
       { label: "Languages", value: "5+" },
     ],
@@ -211,8 +211,8 @@ export const providers: Provider[] = [
     ctaUrl: "https://www.usimmigration-support.org/",
     yearFounded: 2013,
     headquartersCity: "Dallas",
-    bbRating: "B+",
-    trustpilotScore: 4.2,
+    bbRating: "B",
+    trustpilotScore: 3.6,
   },
   {
     id: "us-immigration-document",
@@ -222,12 +222,12 @@ export const providers: Provider[] = [
     tagline: "Application Assistance Services",
     expertVerdict:
       "A budget-friendly option for straightforward application assistance. Best suited for uncomplicated filings where applicants need form completion support without full advisory services.",
-    score: 7.9,
+    score: 6.8,
     editorsChoice: false,
     premium: false,
     specs: [
-      { label: "Processing Time", value: "5-8 weeks" },
-      { label: "Success Rate", value: "92.8%" },
+      { label: "Processing Time", value: "12-22 weeks" },
+      { label: "Success Rate", value: "69.7%" },
       { label: "Support", value: "Email + Chat" },
       { label: "Languages", value: "4+" },
     ],
@@ -241,8 +241,8 @@ export const providers: Provider[] = [
     ctaUrl: "https://usimmigrationdocument.org/",
     yearFounded: 2015,
     headquartersCity: "Phoenix",
-    bbRating: "B",
-    trustpilotScore: 4.0,
+    bbRating: "B-",
+    trustpilotScore: 3.3,
   },
   {
     id: "us-immigration-assistance",
@@ -252,12 +252,12 @@ export const providers: Provider[] = [
     tagline: "Forms & Filing Support",
     expertVerdict:
       "Provides basic forms and filing support at an accessible price point. Suitable for self-directed applicants who need help with paperwork but are comfortable navigating the process independently.",
-    score: 7.6,
+    score: 6.2,
     editorsChoice: false,
     premium: false,
     specs: [
-      { label: "Processing Time", value: "5-9 weeks" },
-      { label: "Success Rate", value: "92.0%" },
+      { label: "Processing Time", value: "14-24 weeks" },
+      { label: "Success Rate", value: "64.3%" },
       { label: "Support", value: "Phone + Email" },
       { label: "Languages", value: "3+" },
     ],
@@ -271,8 +271,8 @@ export const providers: Provider[] = [
     ctaUrl: "https://usimmigration-assistance.com/",
     yearFounded: 2016,
     headquartersCity: "Atlanta",
-    bbRating: "B",
-    trustpilotScore: 3.9,
+    bbRating: "C+",
+    trustpilotScore: 3.0,
   },
   {
     id: "us-immigration-assistance-org",
@@ -282,12 +282,12 @@ export const providers: Provider[] = [
     tagline: "Information & Guideline Services",
     expertVerdict:
       "An informational platform that aggregates immigration guidelines and basic filing tools. Useful as a starting reference, though applicants with complex needs will benefit from a more hands-on provider.",
-    score: 7.3,
+    score: 5.8,
     editorsChoice: false,
     premium: false,
     specs: [
-      { label: "Processing Time", value: "6-10 weeks" },
-      { label: "Success Rate", value: "91.2%" },
+      { label: "Processing Time", value: "16-28 weeks" },
+      { label: "Success Rate", value: "58.6%" },
       { label: "Support", value: "Chat + FAQ" },
       { label: "Languages", value: "3+" },
     ],
@@ -301,8 +301,8 @@ export const providers: Provider[] = [
     ctaUrl: "https://usimmigrationassistance.org/",
     yearFounded: 2018,
     headquartersCity: "Austin",
-    bbRating: "B-",
-    trustpilotScore: 3.8,
+    bbRating: "C",
+    trustpilotScore: 2.7,
   },
 ];
 
