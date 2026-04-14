@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, X, CheckCircle } from "lucide-react";
+import { Star, X, CheckCircle, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RatingModalProps {
@@ -11,30 +11,129 @@ interface RatingModalProps {
   providerName: string;
 }
 
+type SubmitPhase = "idle" | "submitting" | "done";
+
 export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps) {
   const [rating, setRating] = useState(0);
   const [hoveredStar, setHoveredStar] = useState(0);
   const [review, setReview] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [submitPhase, setSubmitPhase] = useState<SubmitPhase>("idle");
+  const [progress, setProgress] = useState(0);
+
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousActiveElement = useRef<HTMLElement | null>(null);
 
   const displayRating = hoveredStar || rating;
 
+  // ── Focus trap ──────────────────────────────────────────────────────
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // Save previously focused element to restore later
+    previousActiveElement.current = document.activeElement as HTMLElement;
+
+    // Focus the modal container on open
+    const timer = setTimeout(() => {
+      modalRef.current?.focus();
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, [isOpen]);
+
+  // Restore focus on close
+  useEffect(() => {
+    if (!isOpen && previousActiveElement.current) {
+      previousActiveElement.current.focus();
+      previousActiveElement.current = null;
+    }
+  }, [isOpen]);
+
+  // ── Escape key listener ─────────────────────────────────────────────
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        handleClose();
+        return;
+      }
+
+      // Focus trap: Tab / Shift+Tab cycling
+      if (e.key === "Tab") {
+        const modal = modalRef.current;
+        if (!modal) return;
+
+        const focusable = modal.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
+  // ── Simulated submission with progress bar ──────────────────────────
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (rating === 0) return;
-    setSubmitted(true);
+
+    // Log the data to console
+    console.log("📋 Rating Submission:", {
+      provider: providerName,
+      rating,
+      review,
+      timestamp: new Date().toISOString(),
+    });
+
+    setSubmitPhase("submitting");
+    setProgress(0);
+
+    // Animate progress bar over 1.5 seconds
+    const duration = 1500;
+    const interval = 30;
+    let elapsed = 0;
+
+    const timer = setInterval(() => {
+      elapsed += interval;
+      const pct = Math.min((elapsed / duration) * 100, 100);
+      setProgress(pct);
+
+      if (elapsed >= duration) {
+        clearInterval(timer);
+        setSubmitPhase("done");
+      }
+    }, interval);
   }
 
-  function handleClose() {
+  const handleClose = useCallback(() => {
     onClose();
-    // Reset state after the exit animation completes
+    // Reset state after exit animation
     setTimeout(() => {
       setRating(0);
       setHoveredStar(0);
       setReview("");
-      setSubmitted(false);
+      setSubmitPhase("idle");
+      setProgress(0);
     }, 300);
-  }
+  }, [onClose]);
 
   return (
     <AnimatePresence>
@@ -51,7 +150,9 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
           aria-label={`Rate ${providerName}`}
         >
           <motion.div
-            className="relative mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-elevated"
+            ref={modalRef}
+            tabIndex={-1}
+            className="relative mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-elevated focus:outline-none"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
@@ -68,7 +169,7 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
               <X className="h-5 w-5" />
             </button>
 
-            {submitted ? (
+            {submitPhase === "done" ? (
               /* ---- Thank-you state ---- */
               <div className="flex flex-col items-center gap-4 py-6 text-center">
                 <CheckCircle className="h-12 w-12 text-emerald-500" />
@@ -78,6 +179,25 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
                 <p className="text-sm text-slate-500">
                   Our editors will review it shortly.
                 </p>
+              </div>
+            ) : submitPhase === "submitting" ? (
+              /* ---- Submitting state with progress bar ---- */
+              <div className="flex flex-col items-center gap-5 py-8 text-center">
+                <Loader2 className="h-10 w-10 animate-spin text-navy-700" />
+                <p className="text-sm font-medium text-slate-700">
+                  Simulating secure submission&hellip;
+                </p>
+                <div className="w-full overflow-hidden rounded-full bg-slate-200">
+                  <div
+                    className="h-2.5 rounded-full bg-gradient-to-r from-navy-700 to-trust-gold transition-all duration-75"
+                    style={{ width: `${progress}%` }}
+                    role="progressbar"
+                    aria-valuenow={Math.round(progress)}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label="Submission progress"
+                  />
+                </div>
               </div>
             ) : (
               /* ---- Form state ---- */

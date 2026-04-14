@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { USFlagIcon } from "@/components/ui/USFlagIcon";
 
 export function Footer() {
@@ -10,14 +11,12 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between gap-10 pb-10 border-b border-white/10">
           {/* Brand */}
           <div className="max-w-xs">
-            <a href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center p-1">
-                <USFlagIcon size={18} />
-              </div>
+            <Link href="/" className="flex items-center gap-2 mb-4">
+              <USFlagIcon size={26} className="rounded-sm" />
               <span className="font-serif text-sm font-bold text-white">
                 US Immigration Authority
               </span>
-            </a>
+            </Link>
             <p className="text-sm text-slate-400 leading-relaxed">
               Independent, expert-reviewed rankings of U.S. immigration service
               providers. Updated monthly.
@@ -25,15 +24,15 @@ export function Footer() {
           </div>
 
           {/* Links */}
-          <div className="flex gap-16">
+          <div className="flex flex-wrap gap-16">
             <div>
               <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
                 Resources
               </h4>
               <ul className="space-y-2">
-                <li><a href="#methodology" className="text-sm text-slate-400 hover:text-white transition-colors">Methodology</a></li>
-                <li><a href="#faq" className="text-sm text-slate-400 hover:text-white transition-colors">FAQ</a></li>
-                <li><a href="#audit" className="text-sm text-slate-400 hover:text-white transition-colors">Audit Trail</a></li>
+                <li><Link href="#methodology" className="text-sm text-slate-400 hover:text-white transition-colors">Methodology</Link></li>
+                <li><Link href="#faq" className="text-sm text-slate-400 hover:text-white transition-colors">FAQ</Link></li>
+                <li><Link href="#audit" className="text-sm text-slate-400 hover:text-white transition-colors">Audit Trail</Link></li>
               </ul>
             </div>
             <div>
@@ -41,9 +40,9 @@ export function Footer() {
                 Legal
               </h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Disclosure</a></li>
+                <li><Link href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Disclosure</Link></li>
               </ul>
             </div>
           </div>

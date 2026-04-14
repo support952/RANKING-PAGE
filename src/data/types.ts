@@ -3,6 +3,32 @@ export interface ProviderSpec {
   value: string;
 }
 
+export interface Review {
+  id: string;
+  author: string;
+  location: string;
+  rating: number; // 1-5
+  title: string;
+  body: string;
+  date: string;
+  verified: boolean;
+  invited: boolean;
+}
+
+export interface RatingDistribution {
+  fiveStar: number;
+  fourStar: number;
+  threeStar: number;
+  twoStar: number;
+  oneStar: number;
+}
+
+export interface ContactInfo {
+  address: string;
+  email: string;
+  phone: string;
+}
+
 export interface Provider {
   id: string;
   rank: number;
@@ -11,7 +37,8 @@ export interface Provider {
   logo?: string;
   tagline: string;
   expertVerdict: string;
-  score: number;
+  aiSummary: string;
+  score: number; // 1-5 scale
   editorsChoice: boolean;
   premium: boolean;
   specs: ProviderSpec[];
@@ -22,7 +49,10 @@ export interface Provider {
   yearFounded?: number;
   headquartersCity?: string;
   bbRating?: string;
-  trustpilotScore?: number;
+  reviewCount: number;
+  ratingDistribution: RatingDistribution;
+  contact: ContactInfo;
+  reviews: Review[];
 }
 
 export interface AuditEntry {

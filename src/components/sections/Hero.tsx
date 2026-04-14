@@ -2,9 +2,14 @@
 
 import { Shield, Clock, Users, Scale } from "lucide-react";
 
+function getCurrentMonthYear(): string {
+  const now = new Date();
+  return now.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+}
+
 const trustIndicators = [
   { icon: Shield, label: "Independently Verified" },
-  { icon: Clock, label: "Updated March 2026" },
+  { icon: Clock, label: `Updated ${getCurrentMonthYear()}` },
   { icon: Users, label: "50K+ Users Served" },
   { icon: Scale, label: "Legally Reviewed" },
 ];
