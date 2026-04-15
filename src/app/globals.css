@@ -38,45 +38,61 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-trust-gold-dark via-trust-gold to-trust-gold-dark;
   }
 
+  /* ── Card System ── */
   .card-premium {
-    @apply relative bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden;
+    @apply relative bg-white rounded-2xl border border-slate-200/80 shadow-card overflow-hidden
+           transition-all duration-300;
   }
 
   .card-premium:hover {
-    @apply shadow-md border-slate-300;
+    @apply shadow-card-hover border-slate-300;
   }
 
   .card-premium.editors-pick {
-    @apply border-trust-gold/40;
+    @apply border-trust-gold/30 shadow-glow-gold;
   }
 
+  .card-premium.editors-pick:hover {
+    @apply border-trust-gold/50;
+  }
+
+  /* ── Buttons ── */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-5 py-2.5
-           bg-navy-900 text-white font-sans font-medium text-sm
+           bg-navy-900 text-white font-sans font-semibold text-sm
            rounded-lg transition-all duration-200
-           hover:bg-navy-800
+           hover:bg-navy-800 hover:shadow-md
+           active:scale-[0.98]
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-900/50 focus-visible:ring-offset-2;
   }
 
   .btn-gold {
     @apply inline-flex items-center justify-center gap-2 px-5 py-2.5
            bg-gradient-to-r from-trust-gold-dark via-trust-gold to-trust-gold-dark
-           text-white font-sans font-semibold text-sm
+           text-white font-sans font-bold text-sm
            rounded-lg transition-all duration-200
-           hover:opacity-90
+           shadow-sm
+           hover:shadow-md hover:brightness-110
+           active:scale-[0.98]
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-trust-gold/50 focus-visible:ring-offset-2;
   }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 px-5 py-2.5
-           bg-white text-navy-900 font-sans font-medium text-sm
+           bg-white text-navy-900 font-sans font-semibold text-sm
            rounded-lg border border-slate-200 transition-all duration-200
-           hover:bg-slate-50 hover:border-slate-300
+           hover:bg-slate-50 hover:border-slate-300 hover:shadow-sm
+           active:scale-[0.98]
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-900/50 focus-visible:ring-offset-2;
   }
 
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-widest text-trust-gold-dark;
+    @apply text-xs font-bold uppercase tracking-[0.15em] text-trust-gold-dark;
+  }
+
+  /* ── Divider ── */
+  .section-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent;
   }
 }
 

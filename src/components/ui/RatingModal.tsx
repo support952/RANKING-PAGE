@@ -9,14 +9,30 @@ interface RatingModalProps {
   isOpen: boolean;
   onClose: () => void;
   providerName: string;
+  providerId: string;
+  onReviewSubmit: (review: {
+    providerId: string;
+    author: string;
+    rating: number;
+    title: string;
+    body: string;
+  }) => void;
 }
 
 type SubmitPhase = "idle" | "submitting" | "done";
 
-export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps) {
+export function RatingModal({
+  isOpen,
+  onClose,
+  providerName,
+  providerId,
+  onReviewSubmit,
+}: RatingModalProps) {
   const [rating, setRating] = useState(0);
   const [hoveredStar, setHoveredStar] = useState(0);
-  const [review, setReview] = useState("");
+  const [authorName, setAuthorName] = useState("");
+  const [reviewTitle, setReviewTitle] = useState("");
+  const [reviewBody, setReviewBody] = useState("");
   const [submitPhase, setSubmitPhase] = useState<SubmitPhase>("idle");
   const [progress, setProgress] = useState(0);
 
@@ -28,19 +44,13 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
   // ── Focus trap ──────────────────────────────────────────────────────
   useEffect(() => {
     if (!isOpen) return;
-
-    // Save previously focused element to restore later
     previousActiveElement.current = document.activeElement as HTMLElement;
-
-    // Focus the modal container on open
     const timer = setTimeout(() => {
       modalRef.current?.focus();
     }, 50);
-
     return () => clearTimeout(timer);
   }, [isOpen]);
 
-  // Restore focus on close
   useEffect(() => {
     if (!isOpen && previousActiveElement.current) {
       previousActiveElement.current.focus();
@@ -48,7 +58,7 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
     }
   }, [isOpen]);
 
-  // ── Escape key listener ─────────────────────────────────────────────
+  // ── Escape key + focus trap ─────────────────────────────────────────
   useEffect(() => {
     if (!isOpen) return;
 
@@ -57,20 +67,15 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
         handleClose();
         return;
       }
-
-      // Focus trap: Tab / Shift+Tab cycling
       if (e.key === "Tab") {
         const modal = modalRef.current;
         if (!modal) return;
-
         const focusable = modal.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
         );
         if (focusable.length === 0) return;
-
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
-
         if (e.shiftKey) {
           if (document.activeElement === first) {
             e.preventDefault();
@@ -87,26 +92,25 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
-  // ── Simulated submission with progress bar ──────────────────────────
+  // ── Submit ──────────────────────────────────────────────────────────
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (rating === 0) return;
+    if (rating === 0 || !authorName.trim()) return;
 
-    // Log the data to console
-    console.log("📋 Rating Submission:", {
-      provider: providerName,
+    onReviewSubmit({
+      providerId,
+      author: authorName.trim(),
       rating,
-      review,
-      timestamp: new Date().toISOString(),
+      title: reviewTitle.trim() || `${rating}-star review`,
+      body: reviewBody.trim(),
     });
 
     setSubmitPhase("submitting");
     setProgress(0);
 
-    // Animate progress bar over 1.5 seconds
     const duration = 1500;
     const interval = 30;
     let elapsed = 0;
@@ -115,7 +119,6 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
       elapsed += interval;
       const pct = Math.min((elapsed / duration) * 100, 100);
       setProgress(pct);
-
       if (elapsed >= duration) {
         clearInterval(timer);
         setSubmitPhase("done");
@@ -125,11 +128,12 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
 
   const handleClose = useCallback(() => {
     onClose();
-    // Reset state after exit animation
     setTimeout(() => {
       setRating(0);
       setHoveredStar(0);
-      setReview("");
+      setAuthorName("");
+      setReviewTitle("");
+      setReviewBody("");
       setSubmitPhase("idle");
       setProgress(0);
     }, 300);
@@ -152,7 +156,7 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
           <motion.div
             ref={modalRef}
             tabIndex={-1}
-            className="relative mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-elevated focus:outline-none"
+            className="relative mx-4 w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-elevated focus:outline-none"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
@@ -170,22 +174,20 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
             </button>
 
             {submitPhase === "done" ? (
-              /* ---- Thank-you state ---- */
               <div className="flex flex-col items-center gap-4 py-6 text-center">
                 <CheckCircle className="h-12 w-12 text-emerald-500" />
                 <p className="text-lg font-semibold text-slate-800">
-                  Thank you for your rating!
+                  Thank you for your review!
                 </p>
                 <p className="text-sm text-slate-500">
-                  Our editors will review it shortly.
+                  Your review is now visible on this page.
                 </p>
               </div>
             ) : submitPhase === "submitting" ? (
-              /* ---- Submitting state with progress bar ---- */
               <div className="flex flex-col items-center gap-5 py-8 text-center">
                 <Loader2 className="h-10 w-10 animate-spin text-navy-700" />
                 <p className="text-sm font-medium text-slate-700">
-                  Simulating secure submission&hellip;
+                  Submitting your review&hellip;
                 </p>
                 <div className="w-full overflow-hidden rounded-full bg-slate-200">
                   <div
@@ -200,8 +202,7 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
                 </div>
               </div>
             ) : (
-              /* ---- Form state ---- */
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <h2 className="text-xl font-semibold text-slate-800">
                   Rate {providerName}
                 </h2>
@@ -211,7 +212,11 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
                   <legend className="mb-2 text-sm font-medium text-slate-600">
                     Your Rating
                   </legend>
-                  <div className="flex gap-1" role="radiogroup" aria-label="Star rating">
+                  <div
+                    className="flex gap-1"
+                    role="radiogroup"
+                    aria-label="Star rating"
+                  >
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         key={star}
@@ -229,7 +234,7 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
                             "h-8 w-8 transition-colors",
                             star <= displayRating
                               ? "fill-amber-400 text-amber-400"
-                              : "fill-slate-200 text-slate-200"
+                              : "fill-slate-200 text-slate-200",
                           )}
                         />
                       </button>
@@ -237,33 +242,61 @@ export function RatingModal({ isOpen, onClose, providerName }: RatingModalProps)
                   </div>
                 </fieldset>
 
-                {/* Review text area */}
+                {/* Name */}
+                <label className="flex flex-col gap-1.5">
+                  <span className="text-sm font-medium text-slate-600">
+                    Your Name <span className="text-red-400">*</span>
+                  </span>
+                  <input
+                    type="text"
+                    value={authorName}
+                    onChange={(e) => setAuthorName(e.target.value)}
+                    placeholder="John D."
+                    required
+                    className="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-200"
+                  />
+                </label>
+
+                {/* Title */}
+                <label className="flex flex-col gap-1.5">
+                  <span className="text-sm font-medium text-slate-600">
+                    Review Title
+                  </span>
+                  <input
+                    type="text"
+                    value={reviewTitle}
+                    onChange={(e) => setReviewTitle(e.target.value)}
+                    placeholder="Summarize your experience..."
+                    className="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-200"
+                  />
+                </label>
+
+                {/* Review body */}
                 <label className="flex flex-col gap-1.5">
                   <span className="text-sm font-medium text-slate-600">
                     Your Review
                   </span>
                   <textarea
-                    value={review}
-                    onChange={(e) => setReview(e.target.value)}
+                    value={reviewBody}
+                    onChange={(e) => setReviewBody(e.target.value)}
                     rows={4}
                     placeholder="Share your experience with this provider..."
                     className="resize-none rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-200"
-                    aria-label="Your review"
                   />
                 </label>
 
                 {/* Submit */}
                 <button
                   type="submit"
-                  disabled={rating === 0}
+                  disabled={rating === 0 || !authorName.trim()}
                   className={cn(
                     "rounded-lg px-4 py-2.5 text-sm font-semibold text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-400 focus-visible:ring-offset-2",
-                    rating === 0
+                    rating === 0 || !authorName.trim()
                       ? "cursor-not-allowed bg-slate-300"
-                      : "bg-navy-900 hover:bg-navy-800"
+                      : "bg-navy-900 hover:bg-navy-800",
                   )}
                 >
-                  Submit Rating
+                  Submit Review
                 </button>
               </form>
             )}

@@ -13,12 +13,13 @@ import {
   Mail,
   Phone,
   Sparkles,
-  BadgeCheck,
+  MessageSquare,
 } from "lucide-react";
 import { Provider } from "@/data/types";
 import { AuthorityStars } from "@/components/ui/AuthorityStars";
 import { Button } from "@/components/ui/Button";
 import { RatingModal } from "@/components/ui/RatingModal";
+import { useUserReviews } from "@/lib/useUserReviews";
 import { cn } from "@/lib/utils";
 
 interface ComparisonCardProps {
@@ -53,10 +54,11 @@ function formatDate(dateStr: string): string {
   });
 }
 
-export function ComparisonCard({ provider, index }: ComparisonCardProps) {
+export function ComparisonCard({ provider }: ComparisonCardProps) {
   const isTopThree = provider.rank <= 3;
   const [expanded, setExpanded] = useState(false);
   const [ratingOpen, setRatingOpen] = useState(false);
+  const { reviews: userReviews, addReview } = useUserReviews(provider.id);
   const rankLabel = getRankLabel(provider.rank);
 
   const toggleExpanded = () => setExpanded((prev) => !prev);
@@ -236,28 +238,35 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
                 <div className="px-5 md:px-6 pb-5">
                   <div className="grid md:grid-cols-5 gap-5">
                     {/* Left Column: Rating Distribution (~60%) */}
-                    <div className="md:col-span-3 rounded-xl border border-slate-200 bg-white p-4">
-                      <h4 className="text-sm font-semibold text-navy-900 mb-3">
+                    <div className="md:col-span-3 rounded-xl border border-slate-200 bg-white p-5">
+                      <h4 className="text-sm font-bold text-navy-900 mb-4">
                         Rating Distribution
                       </h4>
-                      <div className="space-y-2">
-                        {distribution.map((row) => {
+                      <div className="space-y-2.5">
+                        {distribution.map((row, idx) => {
                           const pct =
                             totalRatings > 0
                               ? Math.round((row.count / totalRatings) * 100)
                               : 0;
+                          const barColors = [
+                            "bg-emerald-500",  // 5 star
+                            "bg-lime-500",     // 4 star
+                            "bg-yellow-400",   // 3 star
+                            "bg-orange-400",   // 2 star
+                            "bg-red-400",      // 1 star
+                          ];
                           return (
                             <div key={row.label} className="flex items-center gap-3">
-                              <span className="text-xs font-medium text-slate-600 w-12 shrink-0">
+                              <span className="text-xs font-semibold text-slate-600 w-12 shrink-0">
                                 {row.label}
                               </span>
-                              <div className="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                              <div className="flex-1 h-3 bg-slate-100 rounded overflow-hidden">
                                 <div
-                                  className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+                                  className={`h-full ${barColors[idx]} rounded transition-all duration-500`}
                                   style={{ width: `${pct}%` }}
                                 />
                               </div>
-                              <span className="text-xs font-medium text-slate-500 w-10 text-right shrink-0">
+                              <span className="text-xs font-semibold text-slate-500 w-10 text-right shrink-0">
                                 {pct}%
                               </span>
                             </div>
@@ -312,64 +321,121 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
                   </div>
                 </div>
 
-                {/* ── Section 4: Review Stream ── */}
-                {provider.reviews.length > 0 && (
+                {/* ── Section 4: Trustpilot-style Review Section ── */}
+                {(provider.reviews.length > 0 || userReviews.length > 0) && (
                   <div className="px-5 md:px-6 pb-5">
-                    <h4 className="text-sm font-semibold text-navy-900 mb-3">
-                      Reviews
-                    </h4>
+                    {/* Review header bar */}
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 pb-4 border-b border-slate-200">
+                      <div className="flex items-center gap-3">
+                        <h4 className="text-base font-bold text-navy-900">
+                          Reviews
+                        </h4>
+                        <span className="text-xs text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full font-medium">
+                          {formatNumber(provider.reviewCount + userReviews.length)} total
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => setRatingOpen(true)}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-navy-900 text-white text-xs font-semibold hover:bg-navy-800 transition-colors"
+                      >
+                        <Star className="w-3.5 h-3.5 fill-white" />
+                        Write a Review
+                      </button>
+                    </div>
+
                     <div className="space-y-3">
+                      {/* User-submitted reviews (highlighted) */}
+                      {userReviews.map((ur) => (
+                        <div
+                          key={ur.id}
+                          className="rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50/60 to-white p-4 relative"
+                        >
+                          <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold uppercase">
+                                {ur.author.charAt(0)}
+                              </div>
+                              <div>
+                                <span className="text-sm font-semibold text-navy-900 block leading-tight">
+                                  {ur.author}
+                                </span>
+                                <time dateTime={ur.date} className="text-[0.65rem] text-slate-400">
+                                  {formatDate(ur.date)}
+                                </time>
+                              </div>
+                            </div>
+                            <span className="inline-flex items-center gap-1 text-[0.65rem] font-semibold text-blue-700 bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-full">
+                              <MessageSquare className="w-2.5 h-2.5" />
+                              Your Review
+                            </span>
+                          </div>
+                          <div className="mb-2">
+                            <AuthorityStars score={ur.rating} size="sm" showScore={false} />
+                          </div>
+                          {ur.title && (
+                            <h5 className="font-bold text-navy-900 text-sm leading-snug">
+                              {ur.title}
+                            </h5>
+                          )}
+                          {ur.body && (
+                            <p className="text-sm text-slate-600 leading-relaxed mt-1">
+                              {ur.body}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+
+                      {/* Provider reviews (Trustpilot-style cards) */}
                       {provider.reviews.map((review) => (
                         <div
                           key={review.id}
-                          className="rounded-xl border border-slate-200 bg-white p-4"
+                          className="rounded-xl border border-slate-200 bg-white p-4 hover:border-slate-300 transition-colors"
                         >
-                          {/* Review header: stars + badges */}
-                          <div className="flex items-center gap-3 flex-wrap">
-                            <AuthorityStars
-                              score={review.rating}
-                              size="sm"
-                              showScore={false}
-                            />
-                            {review.verified && (
-                              <span className="inline-flex items-center gap-1 text-[0.65rem] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                                <CheckCircle className="w-2.5 h-2.5" />
-                                Verified
-                              </span>
-                            )}
-                            {review.invited && (
-                              <span className="inline-flex items-center gap-1 text-[0.65rem] font-medium text-slate-500 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded-full">
-                                Invited
-                              </span>
-                            )}
+                          {/* Author row */}
+                          <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold uppercase">
+                                {review.author.charAt(0)}
+                              </div>
+                              <div>
+                                <span className="text-sm font-semibold text-navy-900 block leading-tight">
+                                  {review.author}
+                                </span>
+                                <div className="flex items-center gap-1.5">
+                                  {review.location && (
+                                    <span className="text-[0.65rem] text-slate-400">{review.location}</span>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              {review.verified && (
+                                <span className="inline-flex items-center gap-1 text-[0.65rem] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                                  <CheckCircle className="w-2.5 h-2.5" />
+                                  Verified
+                                </span>
+                              )}
+                              {review.invited && (
+                                <span className="inline-flex items-center gap-1 text-[0.65rem] font-medium text-slate-500 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded-full">
+                                  Invited
+                                </span>
+                              )}
+                            </div>
                           </div>
-
-                          {/* Review title */}
-                          <h5 className="font-semibold text-navy-900 text-sm mt-2.5 leading-snug">
-                            {review.title}
-                          </h5>
-
-                          {/* Review body */}
-                          <p className="text-sm text-slate-600 leading-relaxed mt-1.5">
-                            {review.body}
-                          </p>
-
-                          {/* Author info */}
-                          <div className="flex items-center gap-2 mt-3 text-xs text-slate-400">
-                            <span className="font-medium text-slate-500">
-                              {review.author}
-                            </span>
-                            {review.location && (
-                              <>
-                                <span aria-hidden="true">&middot;</span>
-                                <span>{review.location}</span>
-                              </>
-                            )}
-                            <span aria-hidden="true">&middot;</span>
-                            <time dateTime={review.date}>
+                          {/* Stars + date */}
+                          <div className="flex items-center gap-2.5 mb-2">
+                            <AuthorityStars score={review.rating} size="sm" showScore={false} />
+                            <time dateTime={review.date} className="text-[0.65rem] text-slate-400">
                               {formatDate(review.date)}
                             </time>
                           </div>
+                          {/* Title + body */}
+                          <h5 className="font-bold text-navy-900 text-sm leading-snug">
+                            {review.title}
+                          </h5>
+                          <p className="text-sm text-slate-600 leading-relaxed mt-1">
+                            {review.body}
+                          </p>
                         </div>
                       ))}
                     </div>
@@ -381,7 +447,7 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-4 border-t border-slate-200">
                     <button
                       onClick={() => setRatingOpen(true)}
-                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-colors"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg border-2 border-navy-900 bg-white text-sm font-bold text-navy-900 hover:bg-navy-50 transition-colors"
                     >
                       <Star className="w-4 h-4" />
                       Write a Review
@@ -408,6 +474,8 @@ export function ComparisonCard({ provider, index }: ComparisonCardProps) {
         isOpen={ratingOpen}
         onClose={() => setRatingOpen(false)}
         providerName={provider.name}
+        providerId={provider.id}
+        onReviewSubmit={addReview}
       />
     </>
   );

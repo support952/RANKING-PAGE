@@ -23,40 +23,46 @@ export function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm"
+          ? "bg-white/98 backdrop-blur-xl shadow-sm border-b border-slate-100/80"
           : "bg-white border-b border-slate-100"
       }`}
     >
-      <div className="container-wide flex items-center justify-between h-16">
+      <div className="container-wide flex items-center justify-between h-[60px]">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5">
-          <USFlagIcon size={28} className="rounded-sm" />
-          <span className="font-serif text-sm md:text-base font-bold text-navy-900">
-            US Immigration Authority
-          </span>
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <USFlagIcon size={26} className="rounded-sm" />
+          <div className="flex flex-col">
+            <span className="font-serif text-sm font-bold text-navy-900 leading-tight">
+              US Immigration Authority
+            </span>
+            <span className="text-[0.6rem] text-slate-400 font-medium tracking-wider uppercase leading-tight hidden sm:block">
+              Independent Rankings
+            </span>
+          </div>
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm text-slate-500 hover:text-navy-900 transition-colors"
+              className="px-3.5 py-2 text-sm text-slate-500 hover:text-navy-900 rounded-lg hover:bg-slate-50 transition-all font-medium"
             >
               {link.label}
             </Link>
           ))}
-          <Link href="#rankings" className="btn-primary !px-4 !py-2 !text-xs">
+          <div className="w-px h-6 bg-slate-200 mx-2" />
+          <Link href="#rankings" className="btn-primary !px-4 !py-2 !text-xs !rounded-lg">
             View Rankings
           </Link>
         </div>
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden p-2 text-slate-500"
+          className="md:hidden p-2 text-slate-500 hover:text-navy-900 hover:bg-slate-50 rounded-lg transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
@@ -66,12 +72,12 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1">
+        <div className="md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1 shadow-lg">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="block text-sm text-slate-600 py-2 px-3 rounded-lg hover:bg-slate-50"
+              className="block text-sm text-slate-600 font-medium py-2.5 px-3 rounded-lg hover:bg-slate-50 transition-colors"
               onClick={() => setMobileOpen(false)}
             >
               {link.label}
@@ -79,7 +85,7 @@ export function Navbar() {
           ))}
           <Link
             href="#rankings"
-            className="block text-center text-sm font-semibold py-2 px-3 rounded-lg bg-navy-900 text-white mt-2"
+            className="block text-center text-sm font-bold py-2.5 px-3 rounded-lg bg-navy-900 text-white mt-2 hover:bg-navy-800 transition-colors"
             onClick={() => setMobileOpen(false)}
           >
             View Rankings
