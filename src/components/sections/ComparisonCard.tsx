@@ -281,30 +281,36 @@ export function ComparisonCard({ provider }: ComparisonCardProps) {
                         Contact Information
                       </h4>
                       <div className="space-y-3">
-                        <div className="flex items-start gap-2.5">
-                          <MapPin className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
-                          <span className="text-sm text-slate-600 leading-snug">
-                            {provider.contact.address}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2.5">
-                          <Mail className="w-4 h-4 text-slate-400 shrink-0" />
-                          <a
-                            href={`mailto:${provider.contact.email}`}
-                            className="text-sm text-blue-600 hover:underline"
-                          >
-                            {provider.contact.email}
-                          </a>
-                        </div>
-                        <div className="flex items-center gap-2.5">
-                          <Phone className="w-4 h-4 text-slate-400 shrink-0" />
-                          <a
-                            href={`tel:${provider.contact.phone}`}
-                            className="text-sm text-slate-600 hover:underline"
-                          >
-                            {provider.contact.phone}
-                          </a>
-                        </div>
+                        {provider.contact.address && (
+                          <div className="flex items-start gap-2.5">
+                            <MapPin className="w-4 h-4 text-slate-400 mt-0.5 shrink-0" />
+                            <span className="text-sm text-slate-600 leading-snug">
+                              {provider.contact.address}
+                            </span>
+                          </div>
+                        )}
+                        {provider.contact.email && (
+                          <div className="flex items-center gap-2.5">
+                            <Mail className="w-4 h-4 text-slate-400 shrink-0" />
+                            <a
+                              href={`mailto:${provider.contact.email}`}
+                              className="text-sm text-blue-600 hover:underline"
+                            >
+                              {provider.contact.email}
+                            </a>
+                          </div>
+                        )}
+                        {provider.contact.phone && (
+                          <div className="flex items-center gap-2.5">
+                            <Phone className="w-4 h-4 text-slate-400 shrink-0" />
+                            <a
+                              href={`tel:${provider.contact.phone}`}
+                              className="text-sm text-slate-600 hover:underline"
+                            >
+                              {provider.contact.phone}
+                            </a>
+                          </div>
+                        )}
                         <div className="pt-2 border-t border-slate-100">
                           <a
                             href={provider.ctaUrl}

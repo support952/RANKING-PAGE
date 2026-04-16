@@ -33,14 +33,14 @@ export const providers: Provider[] = [
     ctaLabel: "Visit Site",
     ctaUrl: "https://immigrationadviceservice.org/",
     yearFounded: 2008,
-    headquartersCity: "New York",
+    headquartersCity: "Phoenix, AZ",
     bbRating: "A+",
     reviewCount: 5847,
     ratingDistribution: { fiveStar: 62, fourStar: 18, threeStar: 8, twoStar: 6, oneStar: 6 },
     contact: {
-      address: "40 Wall Street, Suite 2001, New York, NY 10005",
+      address: "2 N Central Ave, Phoenix, AZ 85004",
       email: "support@immigrationadviceservice.org",
-      phone: "+1 (212) 555-0147",
+      phone: "+1 (602) 533-0720",
     },
     reviews: [
       { id: "ias-r1", author: "Sarah Mitchell", location: "Austin, TX", rating: 5, title: "Approved in under four weeks", body: "My H-1B transfer was approved in just 23 days, which my previous attorney said was nearly impossible on that timeline. The legal team kept me updated at every step and caught a discrepancy in my employer's support letter before it became a problem.", date: "2026-03-28", verified: true, invited: true },
@@ -86,14 +86,14 @@ export const providers: Provider[] = [
     ctaLabel: "Visit Site",
     ctaUrl: "https://usagreencard.online/",
     yearFounded: 2010,
-    headquartersCity: "Miami",
+    headquartersCity: "The Woodlands, TX",
     bbRating: "A+",
     reviewCount: 2453,
     ratingDistribution: { fiveStar: 55, fourStar: 15, threeStar: 10, twoStar: 9, oneStar: 11 },
     contact: {
-      address: "1200 Brickell Avenue, Suite 1450, Miami, FL 33131",
-      email: "help@usagreencard.online",
-      phone: "+1 (305) 555-0193",
+      address: "2001 Timberloch Place, Suite 500, The Woodlands, TX 77380",
+      email: "support@usagreencard.online",
+      phone: "+1 (888) 203-6188",
     },
     reviews: [
       { id: "ugc-r1", author: "Yvonne Dupont", location: "Miami, FL", rating: 5, title: "Won the DV Lottery and they guided me through every step", body: "I was selected in the 2026 lottery and had no idea what to do next. USA Green Card walked me through the DS-260, interview prep, and document gathering. My green card arrived eight weeks after my interview.", date: "2026-03-29", verified: true, invited: true },
@@ -147,7 +147,7 @@ export const providers: Provider[] = [
     contact: {
       address: "580 Market Street, Suite 300, San Francisco, CA 94104",
       email: "support@immi-net.com",
-      phone: "+1 (415) 555-0281",
+      phone: "",
     },
     reviews: [
       { id: "in-r1", author: "Steven Hayes", location: "San Francisco, CA", rating: 5, title: "The dashboard alone is worth it", body: "Being able to see exactly where my case stood at any moment reduced my anxiety enormously. Every document, every milestone, every next step was right there on one screen. No other service I looked at offered anything close.", date: "2026-03-30", verified: true, invited: true },
@@ -199,9 +199,9 @@ export const providers: Provider[] = [
     reviewCount: 924,
     ratingDistribution: { fiveStar: 28, fourStar: 10, threeStar: 9, twoStar: 16, oneStar: 37 },
     contact: {
-      address: "233 S. Wacker Drive, Suite 4800, Chicago, IL 60606",
-      email: "info@goodadvise.org",
-      phone: "+1 (312) 555-0164",
+      address: "82 Athinon, Akinita Ieras Mitropolis, Off. 206, 3040 Limassol, Cyprus",
+      email: "support@goodadvise.org",
+      phone: "+1 (888) 552-5080",
     },
     reviews: [
       { id: "ga-r1", author: "Sarah Collins", location: "Chicago, IL", rating: 5, title: "My consultant felt like a partner, not a vendor", body: "Marcus, my dedicated consultant, remembered every detail of my case without me having to repeat myself. He called me on a Saturday when he noticed a filing window was about to close. That level of care is hard to find.", date: "2026-03-29", verified: true, invited: true },
@@ -246,14 +246,14 @@ export const providers: Provider[] = [
     ctaLabel: "Visit Site",
     ctaUrl: "https://immigrationservicesgroup.com/",
     yearFounded: 2009,
-    headquartersCity: "Washington, D.C.",
+    headquartersCity: "Barcelona, Spain",
     bbRating: "A-",
     reviewCount: 687,
     ratingDistribution: { fiveStar: 32, fourStar: 14, threeStar: 11, twoStar: 15, oneStar: 28 },
     contact: {
-      address: "1750 Pennsylvania Avenue NW, Suite 300, Washington, D.C. 20006",
-      email: "corporate@immigrationservicesgroup.com",
-      phone: "+1 (202) 555-0312",
+      address: "Calle Onagre 3, Olivella, 08818, Barcelona, Spain",
+      email: "support@immigrationservicesgroup.com",
+      phone: "+1 (888) 203-6188",
     },
     reviews: [
       { id: "isg-r1", author: "Steven Marshall", location: "Washington, D.C.", rating: 5, title: "They handle our entire global mobility program", body: "Our company transferred twelve employees across three countries last year and ISG managed every single case. Not a single denial, not a single missed deadline. Their account manager knows our corporate structure better than some of our own HR staff.", date: "2026-03-28", verified: true, invited: true },
@@ -305,9 +305,9 @@ export const providers: Provider[] = [
     reviewCount: 456,
     ratingDistribution: { fiveStar: 24, fourStar: 12, threeStar: 14, twoStar: 18, oneStar: 32 },
     contact: {
-      address: "1001 Fannin Street, Suite 3200, Houston, TX 77002",
-      email: "info@usimmigrationsupport.com",
-      phone: "+1 (713) 555-0276",
+      address: "",
+      email: "",
+      phone: "",
     },
     reviews: [
       { id: "uis-r1", author: "Linda Zhao", location: "Philadelphia, PA", rating: 3, title: "Helpful guides but slow support", body: "The resource library is genuinely extensive and I found useful guides for my H-1B questions. However, when I needed help with a specific issue, support took three days to respond and pointed me back to articles I had already read.", date: "2026-03-14", verified: true, invited: true },
@@ -353,9 +353,9 @@ export const providers: Provider[] = [
     reviewCount: 312,
     ratingDistribution: { fiveStar: 13, fourStar: 6, threeStar: 11, twoStar: 16, oneStar: 54 },
     contact: {
-      address: "2100 Ross Avenue, Suite 1200, Dallas, TX 75201",
+      address: "",
       email: "support@usimmigration-support.org",
-      phone: "+1 (214) 555-0198",
+      phone: "",
     },
     reviews: [
       { id: "uiso-r1", author: "Grace Obi", location: "Columbus, OH", rating: 1, title: "Website looks official but it is not a government site", body: "The website is designed to look like an official U.S. government immigration portal. I only realized after paying $179 for an ESTA that the actual government fee is a fraction of that. There is a small disclaimer buried at the bottom, but the overall presentation is deliberately misleading.", date: "2026-03-16", verified: true, invited: true },
@@ -395,14 +395,14 @@ export const providers: Provider[] = [
     ctaLabel: "Visit Site",
     ctaUrl: "https://usimmigrationdocument.org/",
     yearFounded: 2015,
-    headquartersCity: "Phoenix",
+    headquartersCity: "Sheridan, WY",
     bbRating: "B-",
     reviewCount: 203,
     ratingDistribution: { fiveStar: 11, fourStar: 7, threeStar: 12, twoStar: 22, oneStar: 48 },
     contact: {
-      address: "2 N. Central Avenue, Suite 1800, Phoenix, AZ 85004",
-      email: "help@usimmigrationdocument.org",
-      phone: "+1 (602) 555-0234",
+      address: "30 N Gould St, Ste R, Sheridan, WY 82801-6317, United States",
+      email: "Support@usimmigrationdocument.org",
+      phone: "+1 (717) 908-1332",
     },
     reviews: [
       { id: "uid-r1", author: "Jessica Patel", location: "Tampa, FL", rating: 1, title: "Paid $179 and nothing was ever submitted", body: "I paid for ESTA processing and waited three weeks with no confirmation. When I contacted U.S. Customs and Border Protection directly, they had no record of any application under my name. The company essentially took my money and did nothing. Chat support is just a bot that loops you to FAQ pages.", date: "2026-03-12", verified: true, invited: true },
@@ -448,9 +448,9 @@ export const providers: Provider[] = [
     reviewCount: 147,
     ratingDistribution: { fiveStar: 8, fourStar: 5, threeStar: 9, twoStar: 19, oneStar: 59 },
     contact: {
-      address: "191 Peachtree Street NE, Suite 2700, Atlanta, GA 30303",
-      email: "contact@usimmigration-assistance.com",
-      phone: "+1 (404) 555-0189",
+      address: "",
+      email: "",
+      phone: "",
     },
     reviews: [
       { id: "uia-r1", author: "Olga Ivanova", location: "Raleigh, NC", rating: 1, title: "Fake page that mimics the official visa application", body: "This website is designed to look exactly like the official U.S. visa application site. I entered all my personal information and paid $121 before realizing it was not a government website. I never received a confirmation email, receipt, or any evidence that anything was filed. This is a scam.", date: "2026-03-08", verified: true, invited: true },
@@ -496,9 +496,9 @@ export const providers: Provider[] = [
     reviewCount: 89,
     ratingDistribution: { fiveStar: 5, fourStar: 3, threeStar: 7, twoStar: 17, oneStar: 68 },
     contact: {
-      address: "100 Congress Avenue, Suite 2000, Austin, TX 78701",
-      email: "info@usimmigrationassistance.org",
-      phone: "+1 (512) 555-0147",
+      address: "",
+      email: "support@usimmigrationassistance.com",
+      phone: "",
     },
     reviews: [
       { id: "uiao-r1", author: "Yuki Tanaka", location: "Honolulu, HI", rating: 2, title: "Just a chatbot disguised as immigration support", body: "I signed up thinking this was an assistance service but it is really just an information aggregator with a chat widget. The chat loops you back to the same FAQ pages no matter what you ask. Complete waste of the introductory fee.", date: "2026-03-06", verified: true, invited: true },
