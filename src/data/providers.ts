@@ -16,7 +16,7 @@ export const providers: Provider[] = [
     editorsChoice: true,
     premium: true,
     specs: [
-      { label: "Avg. Case Duration", value: "2-6 months" },
+      { label: "Avg. Case Duration", value: "12-24 months" },
       { label: "Success Rate", value: "89.2%" },
       { label: "Support", value: "24/7 Legal Team" },
       { label: "Languages", value: "14+" },
@@ -69,7 +69,7 @@ export const providers: Provider[] = [
     editorsChoice: true,
     premium: true,
     specs: [
-      { label: "Avg. Case Duration", value: "3-9 months" },
+      { label: "Avg. Case Duration", value: "12-24 months" },
       { label: "Success Rate", value: "84.5%" },
       { label: "Support", value: "24/7 Live Chat" },
       { label: "Languages", value: "12+" },
@@ -122,7 +122,7 @@ export const providers: Provider[] = [
     editorsChoice: true,
     premium: true,
     specs: [
-      { label: "Avg. Case Duration", value: "3-12 months" },
+      { label: "Avg. Case Duration", value: "12-24 months" },
       { label: "Success Rate", value: "78.3%" },
       { label: "Support", value: "24/7 Chat + Phone" },
       { label: "Languages", value: "10+" },
@@ -176,7 +176,7 @@ export const providers: Provider[] = [
     editorsChoice: true,
     premium: true,
     specs: [
-      { label: "Avg. Case Duration", value: "4-14 months" },
+      { label: "Avg. Case Duration", value: "14-26 months" },
       { label: "Success Rate", value: "72.6%" },
       { label: "Support", value: "Dedicated Consultant" },
       { label: "Languages", value: "8+" },
@@ -228,7 +228,7 @@ export const providers: Provider[] = [
     editorsChoice: true,
     premium: true,
     specs: [
-      { label: "Avg. Case Duration", value: "3-10 months" },
+      { label: "Avg. Case Duration", value: "14-28 months" },
       { label: "Success Rate", value: "71.4%" },
       { label: "Support", value: "Account Manager" },
       { label: "Languages", value: "9+" },
@@ -282,7 +282,7 @@ export const providers: Provider[] = [
     editorsChoice: false,
     premium: false,
     specs: [
-      { label: "Avg. Case Duration", value: "6-18 months" },
+      { label: "Avg. Case Duration", value: "18-32 months" },
       { label: "Success Rate", value: "58.3%" },
       { label: "Support", value: "Business Hours" },
       { label: "Languages", value: "6+" },
@@ -330,7 +330,7 @@ export const providers: Provider[] = [
     editorsChoice: false,
     premium: false,
     specs: [
-      { label: "Avg. Case Duration", value: "8-22 months" },
+      { label: "Avg. Case Duration", value: "20-36 months" },
       { label: "Success Rate", value: "52.7%" },
       { label: "Support", value: "Email + Phone" },
       { label: "Languages", value: "5+" },
@@ -377,7 +377,7 @@ export const providers: Provider[] = [
     editorsChoice: false,
     premium: false,
     specs: [
-      { label: "Avg. Case Duration", value: "10-24 months" },
+      { label: "Avg. Case Duration", value: "24-40 months" },
       { label: "Success Rate", value: "44.1%" },
       { label: "Support", value: "Email + Chat" },
       { label: "Languages", value: "4+" },
@@ -425,7 +425,7 @@ export const providers: Provider[] = [
     editorsChoice: false,
     premium: false,
     specs: [
-      { label: "Avg. Case Duration", value: "12-30 months" },
+      { label: "Avg. Case Duration", value: "28-48 months" },
       { label: "Success Rate", value: "38.5%" },
       { label: "Support", value: "Phone + Email" },
       { label: "Languages", value: "3+" },
@@ -472,7 +472,7 @@ export const providers: Provider[] = [
     editorsChoice: false,
     premium: false,
     specs: [
-      { label: "Avg. Case Duration", value: "14-36 months" },
+      { label: "Avg. Case Duration", value: "30-48+ months" },
       { label: "Success Rate", value: "31.2%" },
       { label: "Support", value: "Chat + FAQ" },
       { label: "Languages", value: "3+" },
